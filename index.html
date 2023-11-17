@@ -60,7 +60,7 @@
             display: none;
             padding: 10px;
             border-radius: 5px;
-            width: 40%;
+            width: 20%;
             margin-left: auto;
             margin-right: auto;
         }
@@ -137,9 +137,6 @@
             // Store the generated URL in the variable
             var generatedURL = `https://dhsrest.fmsapps.com/dhsv2/acquirers/${acquirerId}/merchants/${merchantId}/dccoffers?currency=${currency}&baseamount=${baseAmount}`;
 
-            // Log the generated URL to the console (you can modify this to perform other actions)
-            console.log("Generated URL:", generatedURL);
-
             try {
                 // Fetch JSON response from the generated URL
                 var response = await fetch(generatedURL);
@@ -149,9 +146,15 @@
                 if (JSON.stringify(responseData).toLowerCase().includes("no such merchant")) {
                     // Display the not setup banner
                     document.getElementById("notSetupBanner").style.display = "block";
+
+                    // Hide the URL if "No such Merchant" is mentioned
+                    console.log("No such Merchant");
                 } else {
                     // Hide the not setup banner if condition is not met
                     document.getElementById("notSetupBanner").style.display = "none";
+
+                    // Log the generated URL to the console (you can modify this to perform other actions)
+                    console.log("Generated URL:", generatedURL);
                 }
 
                 // Format and display the JSON data on the page
