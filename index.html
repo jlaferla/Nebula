@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Enquiry</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        input {
+            width: 200px;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #ff0023;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d1001c;
+        }
+
+        h1 {
+            color: #ff0023;
+        }
+
+        #responseData {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .response-text {
+            color: #8013d3;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Rate Enquiry</h1>
+
+    <label for="acquirerId">Acquirer ID:</label>
+    <input type="text" id="acquirerId" name="acquirerId" maxlength="3" required>
+
+    <label for="merchantId">Merchant ID:</label>
+    <input type="text" id="merchantId" name="merchantId" maxlength="15" required>
+
+    <label for="currency">Currency:</label>
+    <input type="text" id="currency" name="currency" maxlength="3" required>
+
+    <label for="baseAmount">Base Amount:</label>
+    <input type="text" id="baseAmount" name="baseAmount" value="1.00" required>
+
+    <!-- Add more fields as needed -->
+
+    <br>
+
+    <button type="button" onclick="sendData()">Send</button>
+
+    <div id="responseData"></div>
+
+    <script>
+        // Function to send data and display response
+        async function sendData() {
+            var acquirerId = document.getElementById("acquirerId").value;
+            var merchantId = document.getElementById("merchantId").value;
+            var currency = document.getElementById("currency").value;
+            var baseAmount = document.getElementById("baseAmount").value;
+
+            // Store the generated URL in the variable
+            var generatedURL = `https://dhsrest.fmsapps.com/dhsv2/acquirers/${acquirerId}/merchants/${merchantId}/dccoffers?currency=${currency}&baseamount=${baseAmount}`;
+
+            // Log the generated URL to the console (you can modify this to perform other actions)
+            console.log("Generated URL:", generatedURL);
+
+            try {
+                // Fetch JSON response from the generated URL
+                var response = await fetch(generatedURL);
+                var responseData = await response.json();
+
+                // Format and display the JSON data on the page
+                var responseContent = JSON.stringify(responseData, null, 2);
+                document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+        }
+    </script>
+</body>
+
+</html>
