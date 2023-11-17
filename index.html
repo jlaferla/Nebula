@@ -18,7 +18,8 @@
             text-align: center;
         }
 
-        input, select {
+        input,
+        select {
             width: 200px;
             padding: 8px;
             margin-bottom: 10px;
@@ -53,6 +54,21 @@
         .response-text {
             color: #8013d3;
             text-align: left;
+        }
+
+        .response-banner {
+            display: none;
+            padding: 10px;
+            border-radius: 5px;
+            width: 40%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #notSetupBanner {
+            background-color: #8013d3;
+            color: #08cebe;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -106,6 +122,8 @@
 
     <button type="button" onclick="sendData()">Send</button>
 
+    <div id="notSetupBanner" class="response-banner">Merchant is not setup</div>
+
     <div id="responseData"></div>
 
     <script>
@@ -126,6 +144,15 @@
                 // Fetch JSON response from the generated URL
                 var response = await fetch(generatedURL);
                 var responseData = await response.json();
+
+                // Check if the word "No such Merchant" is mentioned in the response
+                if (JSON.stringify(responseData).toLowerCase().includes("no such merchant")) {
+                    // Display the not setup banner
+                    document.getElementById("notSetupBanner").style.display = "block";
+                } else {
+                    // Hide the not setup banner if condition is not met
+                    document.getElementById("notSetupBanner").style.display = "none";
+                }
 
                 // Format and display the JSON data on the page
                 var responseContent = JSON.stringify(responseData, null, 2);
