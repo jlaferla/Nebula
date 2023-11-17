@@ -64,7 +64,8 @@
             margin: 20px auto 0; /* Added more space at the top */
         }
 
-        #notSetupBanner {
+        #notSetupBanner,
+        #notAvailableBanner {
             background-color: #8013d3;
             color: #08cebe;
             font-weight: bold;
@@ -122,6 +123,7 @@
     <button type="button" onclick="sendData()">Send</button>
 
     <div id="notSetupBanner" class="response-banner">Merchant is not setup</div>
+    <div id="notAvailableBanner" class="response-banner">Exchange Rate not available</div>
 
     <div id="responseData"></div>
 
@@ -145,12 +147,19 @@
                 if (JSON.stringify(responseData).toLowerCase().includes("no such merchant")) {
                     // Display the not setup banner
                     document.getElementById("notSetupBanner").style.display = "block";
-
+                    document.getElementById("notAvailableBanner").style.display = "none";
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
+                } else if (JSON.stringify(responseData).includes("{}")) {
+                    // Display the not available banner
+                    document.getElementById("notAvailableBanner").style.display = "block";
+                    document.getElementById("notSetupBanner").style.display = "none";
                     // Hide the response content
                     document.getElementById("responseData").innerHTML = "";
                 } else {
-                    // Hide the not setup banner if condition is not met
+                    // Hide the banners if none of the conditions are met
                     document.getElementById("notSetupBanner").style.display = "none";
+                    document.getElementById("notAvailableBanner").style.display = "none";
 
                     // Log the generated URL to the console (you can modify this to perform other actions)
                     console.log("Generated URL:", generatedURL);
