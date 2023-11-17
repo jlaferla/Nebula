@@ -46,7 +46,7 @@
         #responseData {
             margin-top: 20px;
             text-align: left;
-            max-width: 400px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -62,6 +62,9 @@
             border-radius: 5px;
             width: 20%;
             margin: 20px auto 0; /* Added more space at the top */
+            background-color: #8013d3;
+            color: #08cebe;
+            font-weight: bold;
         }
 
         #notSetupBanner,
@@ -69,6 +72,22 @@
             background-color: #8013d3;
             color: #08cebe;
             font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
@@ -156,6 +175,37 @@
                     document.getElementById("notSetupBanner").style.display = "none";
                     // Hide the response content
                     document.getElementById("responseData").innerHTML = "";
+                } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
+                    // Display the banner with rate, marginPercentage, and foreignAmount
+                    document.getElementById("notSetupBanner").style.display = "none";
+                    document.getElementById("notAvailableBanner").style.display = "none";
+
+                    var rate = responseData.rate;
+                    var marginPercentage = responseData.marginPercentage;
+                    var foreignAmount = responseData.foreignAmount;
+
+                    var tableContent = `<table>
+                                            <tr>
+                                                <th>Key</th>
+                                                <th>Value</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Rate</td>
+                                                <td>${rate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Margin Percentage</td>
+                                                <td>${marginPercentage}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Foreign Amount</td>
+                                                <td>${foreignAmount}</td>
+                                            </tr>
+                                        </table>`;
+
+                    // Display the table content
+                    document.getElementById("responseData").innerHTML = tableContent;
+
                 } else {
                     // Hide the banners if none of the conditions are met
                     document.getElementById("notSetupBanner").style.display = "none";
