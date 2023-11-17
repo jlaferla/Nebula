@@ -180,7 +180,7 @@
                     document.getElementById("notSetupBanner").style.display = "none";
                     document.getElementById("notAvailableBanner").style.display = "none";
 
-                    var rate = responseData.rate;
+                    var exchangeRate = responseData.exchangeRate;
                     var foreignAmount = responseData.foreignAmount;
 
                     var tableContent = `<table>
@@ -189,8 +189,8 @@
                                                 <th>Value</th>
                                             </tr>
                                             <tr>
-                                                <td>Rate</td>
-                                                <td>${rate}</td>
+                                                <td>Exchange Rate</td>
+                                                <td>${exchangeRate.rate}</td>
                                             </tr>
                                             <tr>
                                                 <td>Foreign Amount</td>
