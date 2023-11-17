@@ -176,12 +176,11 @@
                     // Hide the response content
                     document.getElementById("responseData").innerHTML = "";
                 } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
-                    // Display the banner with rate, marginPercentage, and foreignAmount
+                    // Display the table with rate and foreignAmount
                     document.getElementById("notSetupBanner").style.display = "none";
                     document.getElementById("notAvailableBanner").style.display = "none";
 
                     var rate = responseData.rate;
-                    var marginPercentage = responseData.marginPercentage;
                     var foreignAmount = responseData.foreignAmount;
 
                     var tableContent = `<table>
@@ -192,10 +191,6 @@
                                             <tr>
                                                 <td>Rate</td>
                                                 <td>${rate}</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Margin Percentage</td>
-                                                <td>${marginPercentage}</td>
                                             </tr>
                                             <tr>
                                                 <td>Foreign Amount</td>
