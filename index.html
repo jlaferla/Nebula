@@ -66,11 +66,11 @@
     <label for="merchantId">Merchant ID:</label>
     <input type="text" id="merchantId" name="merchantId" maxlength="15" required>
 
-    <label for="currency">Currency:</label>
-    <input type="text" id="currency" name="currency" maxlength="3" required>
-
     <label for="baseAmount">Base Amount:</label>
     <input type="text" id="baseAmount" name="baseAmount" value="1.00" required>
+
+    <label for="currency">Currency:</label>
+    <input type="text" id="currency" name="currency" required>
 
     <!-- Add more fields as needed -->
 
@@ -85,8 +85,8 @@
         async function sendData() {
             var acquirerId = document.getElementById("acquirerId").value;
             var merchantId = document.getElementById("merchantId").value;
-            var currency = document.getElementById("currency").value;
             var baseAmount = document.getElementById("baseAmount").value;
+            var currency = document.getElementById("currency").value;
 
             // Store the generated URL in the variable
             var generatedURL = `https://dhsrest.fmsapps.com/dhsv2/acquirers/${acquirerId}/merchants/${merchantId}/dccoffers?currency=${currency}&baseamount=${baseAmount}`;
