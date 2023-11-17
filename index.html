@@ -75,19 +75,23 @@
         }
 
         table {
-            width: 100%;
+            width: 80%; /* Shortened width of table */
             border-collapse: collapse;
             margin-top: 20px;
+            font-family: Calibri, sans-serif; /* Set font to Calibri */
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
+            font-family: Calibri, sans-serif; /* Set font to Calibri */
         }
 
         th {
-            background-color: #f2f2f2;
+            background-color: #ff0023; /* Set background color of top line to HEX #ff0023 */
+            color: white; /* Set text color to white */
         }
     </style>
 </head>
@@ -185,7 +189,7 @@
 
                     var tableContent = `<table>
                                             <tr>
-                                                <th>Key</th>
+                                                <th>Field</th>
                                                 <th>Value</th>
                                             </tr>
                                             <tr>
