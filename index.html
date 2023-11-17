@@ -61,8 +61,7 @@
             padding: 10px;
             border-radius: 5px;
             width: 20%;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 20px auto 0; /* Added more space at the top */
         }
 
         #notSetupBanner {
@@ -147,19 +146,19 @@
                     // Display the not setup banner
                     document.getElementById("notSetupBanner").style.display = "block";
 
-                    // Hide the URL if "No such Merchant" is mentioned
-                    console.log("No such Merchant");
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
                 } else {
                     // Hide the not setup banner if condition is not met
                     document.getElementById("notSetupBanner").style.display = "none";
 
                     // Log the generated URL to the console (you can modify this to perform other actions)
                     console.log("Generated URL:", generatedURL);
-                }
 
-                // Format and display the JSON data on the page
-                var responseContent = JSON.stringify(responseData, null, 2);
-                document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+                    // Format and display the JSON data on the page
+                    var responseContent = JSON.stringify(responseData, null, 2);
+                    document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+                }
 
             } catch (error) {
                 console.error("Error fetching data:", error);
