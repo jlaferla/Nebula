@@ -62,9 +62,6 @@
             border-radius: 5px;
             width: 20%;
             margin: 20px auto 0; /* Added more space at the top */
-            background-color: #8013d3;
-            color: #08cebe;
-            font-weight: bold;
         }
 
         #notSetupBanner,
@@ -151,28 +148,14 @@
                     // Display the not setup banner
                     document.getElementById("notSetupBanner").style.display = "block";
                     document.getElementById("notAvailableBanner").style.display = "none";
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
                 } else if (JSON.stringify(responseData).includes("{}")) {
                     // Display the not available banner
                     document.getElementById("notAvailableBanner").style.display = "block";
                     document.getElementById("notSetupBanner").style.display = "none";
-                } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
-                    // Display the banner with rate, marginPercentage, and foreignAmount
-                    document.getElementById("notSetupBanner").style.display = "none";
-                    document.getElementById("notAvailableBanner").style.display = "none";
-
-                    var rate = responseData.rate;
-                    var marginPercentage = responseData.marginPercentage;
-                    var foreignAmount = responseData.foreignAmount;
-
-                    var bannerContent = `<div class="response-banner">
-                                            <p>Rate: ${rate}</p>
-                                            <p>Margin Percentage: ${marginPercentage}</p>
-                                            <p>Foreign Amount: ${foreignAmount}</p>
-                                        </div>`;
-
-                    // Display the banner content
-                    document.getElementById("responseData").innerHTML = bannerContent;
-
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
                 } else {
                     // Hide the banners if none of the conditions are met
                     document.getElementById("notSetupBanner").style.display = "none";
