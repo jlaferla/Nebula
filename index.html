@@ -202,6 +202,9 @@
                     // Hide the statement about the margin
                     document.getElementById("marginStatement").style.display = "none";
                 } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
+                    // Display the statement about the margin
+                    document.getElementById("marginStatement").style.display = "block";
+
                     // Display the table with rate and foreignAmount
                     document.getElementById("notSetupBanner").style.display = "none";
                     document.getElementById("notAvailableBanner").style.display = "none";
@@ -227,8 +230,6 @@
                     // Display the table content
                     document.getElementById("responseData").innerHTML = tableContent;
 
-                    // Display the statement about the margin
-                    document.getElementById("marginStatement").style.display = "block";
                 } else {
                     // Hide the banners if none of the conditions are met
                     document.getElementById("notSetupBanner").style.display = "none";
