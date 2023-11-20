@@ -108,8 +108,12 @@
         /* Added style for the statement */
         #marginStatement {
             margin-top: 20px;
-            color: #8013d3;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #8013d3;
+            color: #08cebe;
             font-weight: bold;
+            display: none;
         }
     </style>
 </head>
@@ -227,7 +231,8 @@
                 // Display the table content
                 document.getElementById("responseData").innerHTML = tableContent;
 
-                // Display the statement about the margin
+                // Display the banner statement about the margin
+                document.getElementById("marginStatement").innerHTML = "Exchange rate and Foreign Amount are inclusive of margin";
                 document.getElementById("marginStatement").style.display = "block";
             } else {
                 // Hide the banners if none of the conditions are met
