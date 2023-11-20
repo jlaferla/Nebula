@@ -113,7 +113,10 @@
             background-color: #8013d3;
             color: #08cebe;
             font-weight: bold;
+            width: 50%; /* Reduced width by 50% */
             display: none;
+            margin-left: auto;
+            margin-right: auto;
         }
     </style>
 </head>
@@ -169,92 +172,94 @@
 
     <div id="notSetupBanner" class="response-banner">Merchant is not setup</div>
     <div id="notAvailableBanner" class="response-banner">Exchange Rate not available</div>
-    <div id="marginStatement">Exchange rate and Foreign Amount are inclusive of margin</div>
 
     <div id="responseData"></div>
-<script>
-    // Function to send data and display response
-    async function sendData() {
-        var acquirerId = document.getElementById("acquirerId").value;
-        var merchantId = document.getElementById("merchantId").value;
-        var baseAmount = document.getElementById("baseAmount").value;
-        var currency = document.getElementById("currency").value;
 
-        // Store the generated URL in the variable
-        var generatedURL = `https://dhsrest.fmsapps.com/dhsv2/acquirers/${acquirerId}/merchants/${merchantId}/dccoffers?currency=${currency}&baseamount=${baseAmount}`;
+    <div id="marginStatement">Exchange rate and Foreign Amount are inclusive of margin</div>
 
-        try {
-            // Fetch JSON response from the generated URL
-            var response = await fetch(generatedURL);
-            var responseData = await response.json();
+    <script>
+        // Function to send data and display response
+        async function sendData() {
+            var acquirerId = document.getElementById("acquirerId").value;
+            var merchantId = document.getElementById("merchantId").value;
+            var baseAmount = document.getElementById("baseAmount").value;
+            var currency = document.getElementById("currency").value;
 
-            // Check if the word "No such Merchant" is mentioned in the response
-            if (JSON.stringify(responseData).toLowerCase().includes("no such merchant")) {
-                // Display the not setup banner
-                document.getElementById("notSetupBanner").style.display = "block";
-                document.getElementById("notAvailableBanner").style.display = "none";
-                // Hide the response content
-                document.getElementById("responseData").innerHTML = "";
-                // Hide the statement about the margin
-                document.getElementById("marginStatement").style.display = "none";
-            } else if (JSON.stringify(responseData).includes("{}")) {
-                // Display the not available banner
-                document.getElementById("notAvailableBanner").style.display = "block";
-                document.getElementById("notSetupBanner").style.display = "none";
-                // Hide the response content
-                document.getElementById("responseData").innerHTML = "";
-                // Hide the statement about the margin
-                document.getElementById("marginStatement").style.display = "none";
-            } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
-                // Display the table with rate and foreignAmount
-                document.getElementById("notSetupBanner").style.display = "none";
-                document.getElementById("notAvailableBanner").style.display = "none";
+            // Store the generated URL in the variable
+            var generatedURL = `https://dhsrest.fmsapps.com/dhsv2/acquirers/${acquirerId}/merchants/${merchantId}/dccoffers?currency=${currency}&baseamount=${baseAmount}`;
 
-                var exchangeRate = responseData.exchangeRate;
-                var foreignAmount = responseData.foreignAmount;
+            try {
+                // Fetch JSON response from the generated URL
+                var response = await fetch(generatedURL);
+                var responseData = await response.json();
 
-                var tableContent = `<table>
-                                        <tr>
-                                            <th>Field</th>
-                                            <th>Value</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Exchange Rate</td>
-                                            <td>${exchangeRate.rate}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Foreign Amount</td>
-                                            <td>${foreignAmount}</td>
-                                        </tr>
-                                    </table>`;
+                // Check if the word "No such Merchant" is mentioned in the response
+                if (JSON.stringify(responseData).toLowerCase().includes("no such merchant")) {
+                    // Display the not setup banner
+                    document.getElementById("notSetupBanner").style.display = "block";
+                    document.getElementById("notAvailableBanner").style.display = "none";
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
+                } else if (JSON.stringify(responseData).includes("{}")) {
+                    // Display the not available banner
+                    document.getElementById("notAvailableBanner").style.display = "block";
+                    document.getElementById("notSetupBanner").style.display = "none";
+                    // Hide the response content
+                    document.getElementById("responseData").innerHTML = "";
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
+                } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
+                    // Display the table with rate and foreignAmount
+                    document.getElementById("notSetupBanner").style.display = "none";
+                    document.getElementById("notAvailableBanner").style.display = "none";
 
-                // Display the table content
-                document.getElementById("responseData").innerHTML = tableContent;
+                    var exchangeRate = responseData.exchangeRate;
+                    var foreignAmount = responseData.foreignAmount;
 
-                // Display the banner statement about the margin
-                document.getElementById("marginStatement").innerHTML = "Exchange rate and Foreign Amount are inclusive of margin";
-                document.getElementById("marginStatement").style.display = "block";
-            } else {
-                // Hide the banners if none of the conditions are met
-                document.getElementById("notSetupBanner").style.display = "none";
-                document.getElementById("notAvailableBanner").style.display = "none";
+                    var tableContent = `<table>
+                                            <tr>
+                                                <th>Field</th>
+                                                <th>Value</th>
+                                            </tr>
+                                            <tr>
+                                                <td>Exchange Rate</td>
+                                                <td>${exchangeRate.rate}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Foreign Amount</td>
+                                                <td>${foreignAmount}</td>
+                                            </tr>
+                                        </table>`;
 
-                // Log the generated URL to the console (you can modify this to perform other actions)
-                console.log("Generated URL:", generatedURL);
+                    // Display the table content
+                    document.getElementById("responseData").innerHTML = tableContent;
 
-                // Format and display the JSON data on the page
-                var responseContent = JSON.stringify(responseData, null, 2);
-                document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+                    // Display the banner statement about the margin
+                    document.getElementById("marginStatement").innerHTML = "Exchange rate and Foreign Amount are inclusive of margin";
+                    document.getElementById("marginStatement").style.display = "block";
+                } else {
+                    // Hide the banners if none of the conditions are met
+                    document.getElementById("notSetupBanner").style.display = "none";
+                    document.getElementById("notAvailableBanner").style.display = "none";
 
-                // Hide the statement about the margin
-                document.getElementById("marginStatement").style.display = "none";
+                    // Log the generated URL to the console (you can modify this to perform other actions)
+                    console.log("Generated URL:", generatedURL);
+
+                    // Format and display the JSON data on the page
+                    var responseContent = JSON.stringify(responseData, null, 2);
+                    document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
+                }
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
             }
-
-        } catch (error) {
-            console.error("Error fetching data:", error);
         }
-    }
-</script>
+    </script>
 
 </body>
 
