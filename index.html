@@ -191,12 +191,16 @@
                     document.getElementById("notAvailableBanner").style.display = "none";
                     // Hide the response content
                     document.getElementById("responseData").innerHTML = "";
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
                 } else if (JSON.stringify(responseData).includes("{}")) {
                     // Display the not available banner
                     document.getElementById("notAvailableBanner").style.display = "block";
                     document.getElementById("notSetupBanner").style.display = "none";
                     // Hide the response content
                     document.getElementById("responseData").innerHTML = "";
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
                 } else if (JSON.stringify(responseData).toLowerCase().includes("rate")) {
                     // Display the table with rate and foreignAmount
                     document.getElementById("notSetupBanner").style.display = "none";
