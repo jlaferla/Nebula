@@ -61,7 +61,7 @@
             padding: 10px;
             border-radius: 5px;
             width: 20%;
-            margin: 10px auto 0; /* Added more space at the top */
+            margin: 20px auto 0; /* Added more space at the top */
             background-color: #8013d3;
             color: #08cebe;
             font-weight: bold;
@@ -75,7 +75,7 @@
         }
 
         table {
-            width: 45%; /* Adjusted width of the table */
+            width: 60%; /* Adjusted width of the table */
             margin: 20px auto; /* Centered the table */
             border-collapse: collapse;
             font-family: Calibri, sans-serif; /* Set font to Calibri */
@@ -97,12 +97,19 @@
         /* Adjusted width of the columns */
         th:first-child,
         td:first-child {
-            width: 50%;
+            width: 30%;
         }
 
         th:last-child,
         td:last-child {
-            width: 50%;
+            width: 40%;
+        }
+
+        /* Added style for the statement */
+        #marginStatement {
+            margin-top: 20px;
+            color: #8013d3;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -160,6 +167,9 @@
     <div id="notAvailableBanner" class="response-banner">Exchange Rate not available</div>
 
     <div id="responseData"></div>
+
+    <!-- Statement about margin -->
+    <div id="marginStatement">The exchange rate and foreign amount are inclusive of the margin.</div>
 
     <script>
         // Function to send data and display response
