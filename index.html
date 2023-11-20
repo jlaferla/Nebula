@@ -168,9 +168,6 @@
 
     <div id="responseData"></div>
 
-    <!-- Statement about margin -->
-    <div id="marginStatement">The exchange rate and foreign amount are inclusive of the margin.</div>
-
     <script>
         // Function to send data and display response
         async function sendData() {
@@ -226,6 +223,8 @@
                     // Display the table content
                     document.getElementById("responseData").innerHTML = tableContent;
 
+                    // Display the statement about the margin
+                    document.getElementById("marginStatement").style.display = "block";
                 } else {
                     // Hide the banners if none of the conditions are met
                     document.getElementById("notSetupBanner").style.display = "none";
@@ -237,6 +236,9 @@
                     // Format and display the JSON data on the page
                     var responseContent = JSON.stringify(responseData, null, 2);
                     document.getElementById("responseData").innerHTML = "<p style='color: #8013d3;'><strong>Response:</strong></p><pre class='response-text'>" + responseContent + "</pre>";
+
+                    // Hide the statement about the margin
+                    document.getElementById("marginStatement").style.display = "none";
                 }
 
             } catch (error) {
